@@ -11,6 +11,6 @@ def netflix_data_search():
 
     titles = soup.find('tbody')
     for i in titles.children:
-        data.append(f'{list(i)[0].text}: {list(i)[1].text} {list(i)[2].text}  {list(i)[3].text}')
-
+        data.append([[f'{list(i)[0].text}:'], [list(i)[1].text], [list(i)[2].text], [list(i)[3].text]])
+        #data.append(f'{list(i)[0].text} {list(i)[1].text} {list(i)[2].text} {list(i)[3].text}')
     return data
