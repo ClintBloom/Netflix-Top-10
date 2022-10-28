@@ -29,28 +29,18 @@ def get_data(btn):
     pos = 80
     gen_data = netflix_data_search()
     for datas in range(0, len(gen_data)):
-        # Number
-        number = my_canvas.create_text(40, pos, text=f'{gen_data[datas][0][0]:>3}', font=display_font)
-        # Title
-        title = my_canvas.create_text(160, pos, text=f'{gen_data[datas][1][0]:^15}', font=display_font)
-        # Streak
-        streak = my_canvas.create_text(280, pos, text=f'{gen_data[datas][2][0]:>2}', font=display_font)
-        # Views
-        views = my_canvas.create_text(360, pos, text=f'{gen_data[datas][3][0]:<9}', font=display_font)
+        my_canvas.create_text(30, pos, text=f'{gen_data[datas][0][0]:>3}', font=display_font)
+        my_canvas.create_text(160, pos, text=f'{gen_data[datas][1][0]:^15}', font=display_font)
+        my_canvas.create_text(280, pos, text=f'{gen_data[datas][2][0]:>2}', font=display_font)
+        my_canvas.create_text(360, pos, text=f'{gen_data[datas][3][0]:<9}', font=display_font)
         pos += 20
     btn.destroy()
-
-# to be added
-def clear_data():
-    pass
 
 
 # Generate Button
 gen_btn = Button(root, text='Generate', bg='grey', command=lambda: get_data(gen_btn))
 my_canvas.create_window(center, can_h-80, width=75, height=25, window=gen_btn)
 
-# Clear Button
-clear_btn = Button(root, text='Clear', bg='white', command=lambda: clear_data())
 # Exit Button
 exit_btn = Button(root, text='Exit', bg='red', command=lambda: root.destroy())
 my_canvas.create_window(center, can_h-40, width=65, height=25, window=exit_btn)
