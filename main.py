@@ -1,7 +1,5 @@
 from tkinter import *
 from tkinter import Label
-from tkinter import Text
-
 from netflixsearch import netflix_data_search
 
 root = Tk()
@@ -28,14 +26,15 @@ my_canvas.create_text(360, 50, text='Views', font=info_font)
 
 
 # Get Data from Netflix top 10 website
+# Each element is dependent of each other
 class DataCreator:
     data = netflix_data_search()
     top_ten = []
     amount = 0
     pos = 60
 
-    def __init__(self, btn):
-        for d in data:
+    def __init__(self):
+        for d in self.data:
             self.top_ten.append([Label(root, text=d[0][0], font=display_font),
                                 Label(root, text=d[1][0], font=display_font),
                                 Label(root, text=d[2][0], font=display_font),
@@ -47,17 +46,22 @@ class DataCreator:
             self.top_ten[self.amount][3].place(x=310, y=self.pos)
             self.pos += 21
             self.amount += 1
-            btn.destroy()
+
+
+def btn_destroy(btn):
+    btn.destroy()
 
 
 # to be added
 def clear_data():
-    for i in DataCreator.top_ten:
-        print(i)
+    for main_list in DataCreator.top_ten:
+        for label in main_list:
+            label.destroy()
+    DataCreator.top_ten.clear()
 
 
 # Generate Button
-gen_btn = Button(root, text='Generate', bg='grey', command=lambda: DataCreator(gen_btn))
+gen_btn = Button(root, text='Generate', bg='grey', command=lambda: [DataCreator(), btn_destroy(gen_btn)])
 my_canvas.create_window(center, can_h-80, width=75, height=25, window=gen_btn)
 
 # Clear Button
